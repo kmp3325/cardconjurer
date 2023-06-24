@@ -113,8 +113,8 @@ async function resetCardIrregularities({canvas = [1500, 2100, 0, 0], resetOthers
 async function setBottomInfoStyle() {
 	if (document.querySelector('#enableNewCollectorStyle').checked) {
 			await loadBottomInfo({
-				midLeft: {text:'{elemidinfo-set} \u2022 {elemidinfo-language}  {savex}{fontbelerenbsc}{fontsize' + scaleHeight(0.001) + '}{upinline' + scaleHeight(0.0005) + '}\uFFEE{savex2}{elemidinfo-artist}', x:0.0647, y:0.9548, width:0.8707, height:0.0171, oneLine:true, font:'gothammedium', size:0.0171, color:'white', outlineWidth:0.003},
-				topLeft: {text:'{elemidinfo-rarity} {elemidinfo-number}', x:0.0647, y:0.9377, width:0.8707, height:0.0171, oneLine:true, font:'gothammedium', size:0.0171, color:'white', outlineWidth:0.003},
+				midLeft: {text:'{elemidinfo-set} \u2022 {elemidinfo-language}  {savex}{fontbelerenbsc}{fontsize' + scaleHeight(0.001) + '}{upinline' + scaleHeight(0.0005) + '}\uFFEE{savex2}{kerning0}{elemidinfo-artist}', x:0.0647, y:0.9548, width:0.8707, height:0.0171, oneLine:true, font:'gothammedium', size:0.0171, color:'white', outlineWidth:0.003, kerning: 0.002},
+				topLeft: {text:'{elemidinfo-rarity} {elemidinfo-number}', x:0.0647, y:0.9377, width:0.8707, height:0.0171, oneLine:true, font:'gothammedium', size:0.0171, color:'white', outlineWidth:0.003, kerning: 0.005},
 				note: {text:'{loadx}{elemidinfo-note}', x:0.0647, y:0.9377, width:0.8707, height:0.0171, oneLine:true, font:'gothammedium', size:0.0171, color:'white', outlineWidth:0.003},
 				bottomLeft: {text:'NOT FOR SALE', x:0.0647, y:0.9719, width:0.8707, height:0.0143, oneLine:true, font:'gothammedium', size:0.0143, color:'white', outlineWidth:0.003},
 				wizards: {name:'wizards', text:'{ptshift0,0.0172}{ubshift0,0.0172}\u2122 & \u00a9 {elemidinfo-year} Wizards of the Coast', x:0.0647, y:0.9377, width:0.8707, height:0.0167, oneLine:true, font:'mplantin', size:0.0162, color:'white', align:'right', outlineWidth:0.003},
@@ -2640,7 +2640,6 @@ function writeText(textObject, targetContext) {
 						currentX = savedTextXPosition2;
 					}
 				} else if (possibleCode.includes('mutatedptshift')) {
-					console.log(card);
 					if (card.frames.findIndex(element => element.name.toLowerCase().includes('mutated ')) >= 0) {
 						ptShift[0] = scaleWidth(parseFloat(possibleCode.replace('mutatedptshift', '').split(',')[0]));
 						ptShift[1] = scaleHeight(parseFloat(possibleCode.split(',')[1]));
