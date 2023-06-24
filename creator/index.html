@@ -282,6 +282,7 @@
 								<button class='input' onclick='addTextbox("Nickname");'>Nickname</button>
 								<button class='input' onclick='addTextbox("Power/Toughness");'>Power/Toughness</button>
 								<button class='input' onclick='addTextbox("DateStamp");'>Date Stamp</button>
+								<button class='input' onclick='addTextbox("ClearMutatedP/T");'>Clear Mutated P/T</button>
 							</div>
 						</div>
 					</div>
@@ -553,6 +554,7 @@
 								<input id='info-set' type='text' class='input' oninput='bottomInfoEdited();' placeholder='Set' value='MTG'>
 								<input id='info-language' type='text' class='input' oninput='bottomInfoEdited();' placeholder='Language' value='EN'>
 								<input id='info-artist' type='text' class='input' oninput='artistEdited(this.value);' placeholder='Artist'>
+								<input id='info-ub' type='text' class='input' oninput='bottomInfoEdited();' placeholder='Universes Beyond' value=''>
 							</div>
 							<div cl<!-- ass='padding input-grid'>
 								<input id='info-year' type='number' class='input' oninput='bottomInfoEdited();' placeholder='0' value='1993'>
@@ -576,6 +578,10 @@
 							<h5 class='input-description margin-bottom'>Show collector info</h5>
 							<label class='checkbox-container input margin-bottom'>Show collector info (uncheck to hide)
 								<input id='enableCollectorInfo' type='checkbox' onchange='enableCollectorInfo();'>
+								<span class='checkmark'></span>
+							</label>
+							<label class='checkbox-container input margin-bottom'>Enabled Universes Beyond Collector Info
+								<input id='enableUniversesBeyondCollectorInfo' type='checkbox' onchange='enableUniversesBeyondCollectorInfo();'>
 								<span class='checkmark'></span>
 							</label>
 						</div>

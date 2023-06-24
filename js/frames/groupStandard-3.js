@@ -7,6 +7,7 @@ loadFramePacks([
 	{name:'Nicknames', value:'M15Nickname-2'},
 	{name:'Miracle', value:'M15Miracle'},
 	{name:'Holo Stamps', value:'M15HoloStamps'},
+	{name:'Mutated Power/Toughness', value:'M15MutatedPT'},
 	{name:'Dark Power/Toughness', value:'M15DarkPT'},
 	{name:'Colored Borders', value:'M15Borders'},
 	{name:'Color Identity Pips', value:'M15CIPips'},
