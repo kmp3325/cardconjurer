@@ -2471,7 +2471,7 @@ function writeText(textObject, targetContext) {
 		lineContext.strokeStyle = textObject.outlineColor || 'black';
 		var textOutlineWidth = scaleHeight(textObject.outlineWidth) || 0;
 		lineContext.lineWidth = textOutlineWidth;
-		if (textObject.isUB === "TRUE" && card.frames.findIndex(element => element.name.toLowerCase().includes('power/toughness')) >= 0 && card.frames.findIndex(element => element.name.toLowerCase().includes('mutated p/t')) < 0 && document.querySelector('#enableUniversesBeyondCollectorInfo').checked) {
+		if (textObject.isUB === "TRUE" && card.frames.findIndex(element => element.name.toLowerCase().includes('power/toughness')) >= 0 && card.frames.findIndex(element => element.name.toLowerCase().includes('mutated ')) < 0 && document.querySelector('#enableUniversesBeyondCollectorInfo').checked) {
 			textAlign = 'left';
 		}
 		//Begin looping through words/codes
@@ -2641,7 +2641,7 @@ function writeText(textObject, targetContext) {
 					}
 				} else if (possibleCode.includes('mutatedptshift')) {
 					console.log(card);
-					if (card.frames.findIndex(element => element.name.toLowerCase().includes('mutated p/t')) >= 0) {
+					if (card.frames.findIndex(element => element.name.toLowerCase().includes('mutated ')) >= 0) {
 						ptShift[0] = scaleWidth(parseFloat(possibleCode.replace('mutatedptshift', '').split(',')[0]));
 						ptShift[1] = scaleHeight(parseFloat(possibleCode.split(',')[1]));
 					}
@@ -3917,7 +3917,7 @@ async function loadCard(selectedCardKey) {
 		document.querySelector('#info-rarity').value = card.infoRarity;
 		document.querySelector('#info-set').value = card.infoSet;
 		document.querySelector('#info-language').value = card.infoLanguage;
-		document.querySelector('#info-note').value = card.infoNote;
+		document.querySelector('#info-note').value = card.infoNote === undefined ? "" : card.infoNote;
 		document.querySelector('#info-year').value = card.infoYear || date.getFullYear();
 		artistEdited(card.infoArtist);
 		document.querySelector('#text-editor').value = card.text[Object.keys(card.text)[selectedTextIndex]].text;
