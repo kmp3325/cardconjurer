@@ -113,8 +113,8 @@ async function resetCardIrregularities({canvas = [1500, 2100, 0, 0], resetOthers
 async function setBottomInfoStyle() {
 	if (document.querySelector('#enableNewCollectorStyle').checked) {
 			await loadBottomInfo({
-				midLeft: {text:'{elemidinfo-set} \u2022 {elemidinfo-language}  {savex}{fontbelerenbsc}{fontsize' + scaleHeight(0.001) + '}{upinline' + scaleHeight(0.0005) + '}\uFFEE{savex2}{kerning0}{elemidinfo-artist}', x:0.0647, y:0.9548, width:0.8707, height:0.0171, oneLine:true, font:'gothammedium', size:0.0171, color:'white', outlineWidth:0.003, kerning: 0.002},
-				topLeft: {text:'{elemidinfo-rarity} {elemidinfo-number}', x:0.0647, y:0.9377, width:0.8707, height:0.0171, oneLine:true, font:'gothammedium', size:0.0171, color:'white', outlineWidth:0.003, kerning: 0.005},
+				midLeft: {text:'{elemidinfo-set} \u2022 {elemidinfo-language}  {savex}{fontbelerenbsc}{fontsize' + scaleHeight(0.001) + '}{upinline' + scaleHeight(0.0005) + '}\uFFEE{savex2}{kerning0}{elemidinfo-artist}', x:0.0647, y:0.9548, width:0.8707, height:0.0171, oneLine:true, font:'gothammedium', size:0.0171, color:'white', outlineWidth:0.003, kerning: 0.001},
+				topLeft: {text:'{elemidinfo-rarity} {elemidinfo-number}', x:0.0647, y:0.9377, width:0.8707, height:0.0171, oneLine:true, font:'gothammedium', size:0.0171, color:'white', outlineWidth:0.003, kerning: 0.001},
 				note: {text:'{loadx}{elemidinfo-note}', x:0.0647, y:0.9377, width:0.8707, height:0.0171, oneLine:true, font:'gothammedium', size:0.0171, color:'white', outlineWidth:0.003},
 				bottomLeft: {text:'NOT FOR SALE', x:0.0647, y:0.9719, width:0.8707, height:0.0143, oneLine:true, font:'gothammedium', size:0.0143, color:'white', outlineWidth:0.003},
 				wizards: {name:'wizards', text:'{ptshift0,0.0172}{ubshift0,0.0172}\u2122 & \u00a9 {elemidinfo-year} Wizards of the Coast', x:0.0647, y:0.9377, width:0.8707, height:0.0167, oneLine:true, font:'mplantin', size:0.0162, color:'white', align:'right', outlineWidth:0.003},
@@ -2624,8 +2624,12 @@ function writeText(textObject, targetContext) {
 						var bottomTextSubstring = card.bottomInfo.midLeft.text.substring(0, card.bottomInfo.midLeft.text.indexOf('  {savex}')).replace('{elemidinfo-set}', document.querySelector('#info-set').value || '').replace('{elemidinfo-language}', document.querySelector('#info-language').value || '');
 						justifyWidth = lineContext.measureText(bottomTextSubstring).width;
 					} else if (word.includes('number') && wordToWrite.includes('/') && card.version != 'pokemon') {
-						fillJustify = true;
-						wordToWrite = Array.from(wordToWrite).join(' ');
+						if (document.querySelector('#enableNewCollectorStyle').checked) {
+							wordToWrite = "0" + wordToWrite.split("/")[0];
+						} else {
+							fillJustify = true;
+							wordToWrite = Array.from(wordToWrite).join(' ');
+						}
 					}
 				} else if (possibleCode == 'savex') {
 					savedTextXPosition = currentX;
@@ -2765,7 +2769,17 @@ function writeText(textObject, targetContext) {
 
 			//if the word goes past the max line width, go to the next line
 			if (wordToWrite && lineContext.measureText(wordToWrite).width + currentX >= textWidth && textArcRadius == 0) {
-				if (textOneLine && startingTextSize > 1) {
+				if (textObject.name.includes("Top Mutate") && card.frames.length > 0) {
+					textObject.x -= .1;
+					textObject.width += .1;
+					for (var i = 0; i < card.frames.length; i++) {
+						if (card.frames[i].name.includes("Top Mutate")) {
+							card.frames[i].bounds.width += .1;
+							card.frames[i].bounds.x -= .1;
+							drawFrames();
+						}
+					}
+				} else if (textOneLine && startingTextSize > 1) {
 					//doesn't fit... try again at a smaller text size?
 					startingTextSize -= 1;
 					continue outerloop;
@@ -3030,10 +3044,15 @@ async function addTextbox(textboxType) {
 		delete card.text['mutated_pt_stamp'];
 		delete card.text['preevo'];
 		redrawTextOptions(card.text);
+	} else if (textboxType == 'TopMutate') {
+		await loadTextOptions({topMutate: {name:'Top Mutate', text:"Mutate onto ", x:0.57, y:0.1129, width:0.32, height:0.0243, oneLine:true, font:'mplantini', size:0.0229, color:'white', shadowX:0.0014, shadowY:0.001, align:'center'}}, false);
 	}
 }
 //ART TAB
 function uploadArt(imageSource, otherParams) {
+	if (!imageSource.includes('http')) {
+		imageSource = 'http://localhost:8080/local_art/' + imageSource;
+	}
 	if (imageSource.includes('localhost:') && window.location.href.includes('localhost:')) {
 		imageSource = imageSource.replace(/http:\/\/localhost:\d*\//, window.location.href);
 	}

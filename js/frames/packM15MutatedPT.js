@@ -9,7 +9,15 @@ availableFrames = [
 	{name:'Green Mutated P/T', src:'/img/frames/m15/nickname/m15NicknamePTG.png', bounds:bounds},
 	{name:'Multicolored Mutated P/T', src:'/img/frames/m15/nickname/m15NicknamePTM.png', bounds:bounds},
 	{name:'Artifact Mutated P/T', src:'/img/frames/m15/nickname/m15NicknamePTA.png', bounds:bounds},
-	{name:'Colorless Mutated P/T', src:'/img/frames/m15/nickname/m15NicknamePTC.png', bounds:bounds}
+	{name:'Colorless Mutated P/T', src:'/img/frames/m15/nickname/m15NicknamePTC.png', bounds:bounds},
+	{name:'Dark White Mutated P/T', src:'/img/frames/m15/ub/regular/ubDarkPTW.png', bounds:bounds},
+	{name:'Dark Blue Mutated P/T', src:'/img/frames/m15/ub/regular/ubDarkPTU.png', bounds:bounds},
+	{name:'Dark Black Mutated P/T', src:'/img/frames/m15/ub/regular/ubDarkPTB.png', bounds:bounds},
+	{name:'Dark Red Mutated P/T', src:'/img/frames/m15/ub/regular/ubDarkPTR.png', bounds:bounds},
+	{name:'Dark Green Mutated P/T', src:'/img/frames/m15/ub/regular/ubDarkPTG.png', bounds:bounds},
+	{name:'Dark Multicolored Mutated P/T', src:'/img/frames/m15/ub/regular/ubDarkPTM.png', bounds:bounds},
+	{name:'Dark Artifact Mutated P/T', src:'/img/frames/m15/ub/regular/ubDarkPTA.png', bounds:bounds},
+	{name:'Dark Colorless Mutated P/T', src:'/img/frames/m15/ub/regular/ubDarkPTC.png', bounds:bounds}
 ];
 //disables/enables the "Load Frame Version" button
 document.querySelector('#loadFrameVersion').disabled = false;
