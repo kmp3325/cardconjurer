@@ -1,5 +1,6 @@
 //Create objects for common properties across available frames
 var bounds = {x:0.5673, y:0.8848, width:0.188, height:0.0733};
+var ubBounds = {x:863/1500, y:1864/2100, width:268/1500, height:134/2100};
 //defines available frames
 availableFrames = [
 	{name:'White Mutated P/T', src:'/img/frames/m15/nickname/m15NicknamePTW.png', bounds:bounds},
@@ -10,14 +11,14 @@ availableFrames = [
 	{name:'Multicolored Mutated P/T', src:'/img/frames/m15/nickname/m15NicknamePTM.png', bounds:bounds},
 	{name:'Artifact Mutated P/T', src:'/img/frames/m15/nickname/m15NicknamePTA.png', bounds:bounds},
 	{name:'Colorless Mutated P/T', src:'/img/frames/m15/nickname/m15NicknamePTC.png', bounds:bounds},
-	{name:'Dark White Mutated P/T', src:'/img/frames/m15/ub/regular/ubDarkPTW.png', bounds:bounds},
-	{name:'Dark Blue Mutated P/T', src:'/img/frames/m15/ub/regular/ubDarkPTU.png', bounds:bounds},
-	{name:'Dark Black Mutated P/T', src:'/img/frames/m15/ub/regular/ubDarkPTB.png', bounds:bounds},
-	{name:'Dark Red Mutated P/T', src:'/img/frames/m15/ub/regular/ubDarkPTR.png', bounds:bounds},
-	{name:'Dark Green Mutated P/T', src:'/img/frames/m15/ub/regular/ubDarkPTG.png', bounds:bounds},
-	{name:'Dark Multicolored Mutated P/T', src:'/img/frames/m15/ub/regular/ubDarkPTM.png', bounds:bounds},
-	{name:'Dark Artifact Mutated P/T', src:'/img/frames/m15/ub/regular/ubDarkPTA.png', bounds:bounds},
-	{name:'Dark Colorless Mutated P/T', src:'/img/frames/m15/ub/regular/ubDarkPTC.png', bounds:bounds}
+	{name:'UB White Mutated P/T', src:'/img/frames/lotr/pt/w.png', bounds:ubBounds},
+	{name:'UB Blue Mutated P/T', src:'/img/frames/lotr/pt/u.png', bounds:ubBounds},
+	{name:'UB Black Mutated P/T', src:'/img/frames/lotr/pt/b.png', bounds:ubBounds},
+	{name:'UB Red Mutated P/T', src:'/img/frames/lotr/pt/r.png', bounds:ubBounds},
+	{name:'UB Green Mutated P/T', src:'/img/frames/lotr/pt/g.png', bounds:ubBounds},
+	{name:'UB Multicolored Mutated P/T', src:'/img/frames/lotr/pt/m.png', bounds:ubBounds},
+	{name:'UB Artifact Mutated P/T', src:'/img/frames/lotr/pt/a.png', bounds:ubBounds},
+	{name:'UB Colorless Mutated P/T', src:'/img/frames/lotr/pt/l.png', bounds:ubBounds}
 ];
 //disables/enables the "Load Frame Version" button
 document.querySelector('#loadFrameVersion').disabled = false;
