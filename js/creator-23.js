@@ -4378,6 +4378,21 @@ function saveCard(saveFromFile) {
 		cardKey = getCardName();
 	}
 	if (!saveFromFile) {
+		var altArt = "";
+		card.frames.forEach(frame => {
+			if (frame.src.includes("m15GenericShowcaseFrame")) {
+				altArt = " full art";
+			} else if (frame.src.includes("borderless")) {
+				altArt = " full art";
+			} else if (frame.src.includes("extended")) {
+				altArt = " extended";
+			} else if (frame.src.includes("m15PromoFrame")) {
+				altArt = " full art";
+			} else if (frame.src.includes("tokenFrame")) {
+				altArt = " token";
+			}
+		});
+		cardKey = cardKey + altArt;
 		cardKey = prompt('Enter the name you would like to save your card under:', cardKey);
 		if (!cardKey) {return null;}
 	}

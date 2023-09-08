@@ -27,7 +27,7 @@ document.querySelector('#loadFrameVersion').onclick = async function() {
 	//text
 	loadTextOptions({
 		mutated_pt: {name: 'Mutated P/T', text:'', x:0.6048, y:0.894, width:0.1367, height:0.0372, size:0.0302, font:'belerenbsc', oneLine:true, align:'center', color:'white', shadowX:-0.0007, shadowY:-0.001},
-		mutated_stamp: {name: 'Mutated P/T Stamp', text:'MUTATED', x:0.6048, y:0.917, width:0.1367, height:0.0272, size:0.0152, font:'belerenbsc', oneLine:true, align:'center', color:'white', shadowX:-0.0007, shadowY:-0.001},
+		mutated_pt_stamp: {name: 'Mutated P/T Stamp', text:'MUTATED', x:0.6048, y:0.917, width:0.1367, height:0.0272, size:0.0152, font:'belerenbsc', oneLine:true, align:'center', color:'white', shadowX:-0.0007, shadowY:-0.001},
 		preevo: {name: 'Evolves From', text:'', size:0.0001, height:0.0001, width:0.0001}
 	}, false);
 	if (card.text && card.text['mutate']) {
