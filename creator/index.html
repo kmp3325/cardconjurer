@@ -289,8 +289,8 @@
 								<button class='input' onclick='addTextbox("Nickname");'>Nickname</button>
 								<button class='input' onclick='addTextbox("Power/Toughness");'>Power/Toughness</button>
 								<button class='input' onclick='addTextbox("DateStamp");'>Date Stamp</button>
-								<button class='input' onclick='addTextbox("ClearMutatedP/T");'>Clear Mutated P/T</button>
-								<button class='input' onclick='addTextbox("TopMutate");'>Top Mutate</button>
+								<button class='input' onclick='addTextbox("ClearEvolvedP/T");'>Clear Evolved P/T</button>
+								<button class='input' onclick='addTextbox("TopEvolve");'>Top Evolve</button>
 							</div>
 						</div>
 					</div>
@@ -307,6 +307,10 @@
 									<h5 class='input-description margin-bottom'></h5>
 										<label class='checkbox-container input'>Autofit when setting art
 											<input id='art-update-autofit' type='checkbox' onchange='setAutofit();'>
+											<span class='checkmark'></span>
+										</label>
+										<label class='checkbox-container input'>Lock art in place
+											<input id='art-lock' type='checkbox' onchange='setArtLock();'>
 											<span class='checkmark'></span>
 										</label>
 								</div>
@@ -559,13 +563,24 @@
 								<input id='info-note' type='text' class='input' oninput='bottomInfoEdited();' placeholder='Note' value=''>
 							</div>
 							<div class='padding input-grid'>
-								<input id='info-set' type='text' class='input' oninput='bottomInfoEdited();' placeholder='Set' value='MTG'>
+								<input id='info-set' type='text' class='input' oninput='bottomInfoEdited();' placeholder='Set' value='PKM'>
 								<input id='info-language' type='text' class='input' oninput='bottomInfoEdited();' placeholder='Language' value='EN'>
 								<input id='info-artist' type='text' class='input' oninput='artistEdited(this.value);' placeholder='Artist'>
 								<input id='info-ub' type='text' class='input' oninput='bottomInfoEdited();' placeholder='Universes Beyond' value='Pokémon'>
 							</div>
-							<div cl<!-- ass='padding input-grid'>
+							<div class='padding input-grid'>
 								<input id='info-year' type='number' class='input' oninput='bottomInfoEdited();' placeholder='0' value='1993'>
+								<input id='info-wizards' type='text' class='input' oninput='bottomInfoEdited();' placeholder='Bottom Right' value='ⓘ 2024 No Commercial Use'>
+							</div>
+							<div class='readable-background padding margin-bottom'>
+								<label class='checkbox-container input margin-bottom'>Use custom Wizards Info for bottom right
+									<input id='enableUseCustomWizardsInfo' type='checkbox' onchange='enableUseCustomWizardsInfo();'>
+									<span class='checkmark'></span>
+								</label>
+								<label class='checkbox-container input margin-bottom'>Enable NOT FOR SALE bottom left
+									<input id='enableBottomLeftInfo' type='checkbox' onchange='enableBottomLeftInfo();'>
+									<span class='checkmark'></span>
+								</label>
 							</div>
 						</div>
 						<div class='readable-background padding margin-bottom'>

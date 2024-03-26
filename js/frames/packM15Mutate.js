@@ -39,8 +39,8 @@ document.querySelector('#loadFrameVersion').onclick = async function() {
 	resetWatermark();
 	//text
 	var mutateText = {name:'Mutate Cost', text:'Mutate {20} {i}(If you cast this spell for its mutate cost, put it over or under target non-Human creature you own. They mutate into the creature on top plus all abilities from under it.)', x:0.086, y:0.6303, width:0.828, height:0.1215, size:0.0291};
-	if (card.text && card.text['mutated_pt']) {
-		mutateText = {name:'Mutate Cost', text:"Mutate onto {pre} {20} {i}(If you cast this spell for its mutate cost, put it over target creature you own named {pre}. They mutate into {cardname} with base power and toughness {mutated_pt} plus {pre}'s abilities.){/i}", x:0.086, y:0.6303, width:0.828, height:0.1215, size:0.0291};
+	if (card.text && card.text['preevo']) {
+		mutateText = {name:'Evolve Cost', text:"Evolve from {pre} {20} {i}(If you cast this spell for its evolve cost, put it over target creature you own named {pre}. They evolve into {cardname} plus {pre}'s abilities.){/i}", x:0.086, y:0.6303, width:0.828, height:0.1215, size:0.0291};
 	}
 	loadTextOptions({
 		mana: {name:'Mana Cost', text:'', y:0.0613, width:0.9292, height:71/2100, oneLine:true, size:71/1638, align:'right', shadowX:-0.001, shadowY:0.0029, manaCost:true, manaSpacing:0},
@@ -48,7 +48,8 @@ document.querySelector('#loadFrameVersion').onclick = async function() {
 		type: {name:'Type', text:'', x:0.0854, y:0.5664, width:0.8292, height:0.0543, oneLine:true, font:'belerenb', size:0.0324},
 		mutate: mutateText,
 		rules: {name:'Rules Text', text:'', x:0.086, y:0.7567, width:0.828, height:0.1615, size:0.0291},
-		pt: {name:'Power/Toughness', text:'', x:0.7928, y:0.902, width:0.1367, height:0.0372, size:0.0372, font:'belerenbsc', oneLine:true, align:'center'}
+		pt: {name:'Power/Toughness', text:'', x:0.7928, y:0.902, width:0.1367, height:0.0372, size:0.0372, font:'belerenbsc', oneLine:true, align:'center'},
+		preevo: {name: 'Evolves From', text:'', size:0.0001, height:0.0001, width:0.0001}
 	});
 }
 //loads available frames

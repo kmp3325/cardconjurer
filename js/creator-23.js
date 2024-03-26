@@ -25,25 +25,19 @@ function setImageUrl(image, source) {
 const baseWidth = 1500;
 const baseHeight = 2100;
 const highResScale = 1.34;
-// function getStandardWidth() {
-// 	var value = baseWidth;
-// 	if (localStorage.getItem('high-res') == 'true') {
-// 		value *= highResScale;
-// 	}
-// 	return value;
-// }
-// function getStandardHeight() {
-// 	var value = baseHeight;
-// 	if (localStorage.getItem('high-res') == 'true') {
-// 		value *= highResScale;
-// 	}
-// 	return value;
-// }
 function getStandardWidth() {
-	return 2010;
+	var value = baseWidth;
+	if (localStorage.getItem('high-res') == 'true') {
+		value *= highResScale;
+	}
+	return value;
 }
 function getStandardHeight() {
-	return 2814;
+	var value = baseHeight;
+	if (localStorage.getItem('high-res') == 'true') {
+		value *= highResScale;
+	}
+	return value;
 }
 
 //card object
@@ -139,15 +133,23 @@ async function resetCardIrregularities({canvas = [getStandardWidth(), getStandar
 	}
 }
 async function setBottomInfoStyle() {
+	var wizards = '\u2122 & \u00a9 {elemidinfo-year} Wizards of the Coast';
+	if (document.querySelector('#enableUseCustomWizardsInfo').checked) {
+		wizards = "{elemidinfo-wizards}";
+	}
+	var bottomLeft = '';
+	if (document.querySelector('#enableBottomLeftInfo').checked) {
+		bottomLeft = "NOT FOR SALE";
+	}
 	if (document.querySelector('#enableNewCollectorStyle').checked) {
 			await loadBottomInfo({
 				midLeft: {text:'{elemidinfo-set} \u2022 {elemidinfo-language}  {savex}{fontbelerenbsc}{fontsize' + scaleHeight(0.001) + '}{upinline' + scaleHeight(0.0005) + '}\uFFEE{savex2}{kerning0}{elemidinfo-artist}', x:0.0647, y:0.9548, width:0.8707, height:0.0171, oneLine:true, font:'gothammedium', size:0.0171, color:'white', outlineWidth:0.003, kerning: 0.001},
 				topLeft: {text:'{elemidinfo-rarity} {elemidinfo-number}', x:0.0647, y:0.9377, width:0.8707, height:0.0171, oneLine:true, font:'gothammedium', size:0.0171, color:'white', outlineWidth:0.003, kerning: 0.001},
 				note: {text:'{loadx}{elemidinfo-note}', x:0.0647, y:0.9377, width:0.8707, height:0.0171, oneLine:true, font:'gothammedium', size:0.0171, color:'white', outlineWidth:0.003},
-				bottomLeft: {text:'NOT FOR SALE', x:0.0647, y:0.9719, width:0.8707, height:0.0143, oneLine:true, font:'gothammedium', size:0.0143, color:'white', outlineWidth:0.003},
-				wizards: {name:'wizards', text:'{ptshift0,0.0172}{ubshift0,0.0172}\u2122 & \u00a9 {elemidinfo-year} Wizards of the Coast', x:0.0647, y:0.9377, width:0.8707, height:0.0167, oneLine:true, font:'mplantin', size:0.0162, color:'white', align:'right', outlineWidth:0.003},
+				bottomLeft: {text:bottomLeft, x:0.0647, y:0.9719, width:0.8707, height:0.0143, oneLine:true, font:'gothammedium', size:0.0143, color:'white', outlineWidth:0.003},
+				wizards: {name:'wizards', text:'{ptshift0,0.0172}{ubshift0,0.0172}' + wizards, x:0.0647, y:0.9377, width:0.8707, height:0.0167, oneLine:true, font:'mplantin', size:0.0162, color:'white', align:'right', outlineWidth:0.003},
 				bottomRight: {text:'{ptshift0,0.0172}CardConjurer.com', x:0.0647, y:0.9548, width:0.8707, height:0.0143, oneLine:true, font:'mplantin', size:0.0143, color:'white', align:'right', outlineWidth:0.003},
-				universesBeyond: {name:'{elemidinfo-ub}', isUB: "TRUE", text:'{ptshift0.5310,0}{mutatedptshift0,0.033}\u00a9 {elemidinfo-ub}', x:0.0647, y:0.9377, width:0.8707, height:0.0167, oneLine:true, font:'mplantin', size:0.0162, color:'white', align:'right', outlineWidth:0.003},
+				universesBeyond: {name:'{elemidinfo-ub}', isUB: "TRUE", text:'{ptshift0.5310,0}{evolvedptshift0,0.033}\u00a9 {elemidinfo-ub}', x:0.0647, y:0.9377, width:0.8707, height:0.0167, oneLine:true, font:'mplantin', size:0.0162, color:'white', align:'right', outlineWidth:0.003},
 			});
 		} else {
 			await loadBottomInfo({
@@ -155,10 +157,10 @@ async function setBottomInfoStyle() {
 				topLeft: {text:'{elemidinfo-number}', x:0.0647, y:0.9377, width:0.8707, height:0.0171, oneLine:true, font:'gothammedium', size:0.0171, color:'white', outlineWidth:0.003},
 				note: {text:'{loadx2}{elemidinfo-note}', x:0.0647, y:0.9377, width:0.8707, height:0.0171, oneLine:true, font:'gothammedium', size:0.0171, color:'white', outlineWidth:0.003},
 				rarity: {text:'{loadx}{elemidinfo-rarity}', x:0.0647, y:0.9377, width:0.8707, height:0.0171, oneLine:true, font:'gothammedium', size:0.0171, color:'white', outlineWidth:0.003},
-				bottomLeft: {text:'NOT FOR SALE', x:0.0647, y:0.9719, width:0.8707, height:0.0143, oneLine:true, font:'gothammedium', size:0.0143, color:'white', outlineWidth:0.003},
-				wizards: {name:'wizards', text:'{ptshift0,0.0172}{ubshift0,0.0172}\u2122 & \u00a9 {elemidinfo-year} Wizards of the Coast', x:0.0647, y:0.9377, width:0.8707, height:0.0167, oneLine:true, font:'mplantin', size:0.0162, color:'white', align:'right', outlineWidth:0.003},
+				bottomLeft: {text:bottomLeft, x:0.0647, y:0.9719, width:0.8707, height:0.0143, oneLine:true, font:'gothammedium', size:0.0143, color:'white', outlineWidth:0.003},
+				wizards: {name:'wizards', text:'{ptshift0,0.0172}{ubshift0,0.0172}' + wizards, x:0.0647, y:0.9377, width:0.8707, height:0.0167, oneLine:true, font:'mplantin', size:0.0162, color:'white', align:'right', outlineWidth:0.003},
 				bottomRight: {text:'{ptshift0,0.0172}CardConjurer.com', x:0.0647, y:0.9548, width:0.8707, height:0.0143, oneLine:true, font:'mplantin', size:0.0143, color:'white', align:'right', outlineWidth:0.003},
-				universesBeyond: {name:'{elemidinfo-ub}', isUB: "TRUE", text:'{ptshift0.5310,0}{mutatedptshift0,0.033}\u00a9 {elemidinfo-ub}', x:0.0647, y:0.9377, width:0.8707, height:0.0167, oneLine:true, font:'mplantin', size:0.0162, color:'white', align:'right', outlineWidth:0.003},
+				universesBeyond: {name:'{elemidinfo-ub}', isUB: "TRUE", text:'{ptshift0.5310,0}{evolvedptshift0,0.033}\u00a9 {elemidinfo-ub}', x:0.0647, y:0.9377, width:0.8707, height:0.0167, oneLine:true, font:'mplantin', size:0.0162, color:'white', align:'right', outlineWidth:0.003},
 			});
 		}
 }
@@ -226,11 +228,11 @@ function getPreEvoName() {
 		return card.text.preevo.text;
 	}
 }
-function getMutatedPt() {
-	if (card.text == undefined || card.text.mutated_pt == undefined) {
+function getEvolvedPt() {
+	if (card.text == undefined || card.text.evolved_pt == undefined) {
 		return '?/?';
 	} else {
-		return card.text.mutated_pt.text;
+		return card.text.evolved_pt.text;
 	}
 }
 function getInlineCardName() {
@@ -3056,11 +3058,48 @@ function loadTextOptions(textObject, replace=true) {
 			});
 		}
 	} else {
-		Object.keys(textObject).forEach(key => {
-			card.text[key] = textObject[key];
-		});
+		if (false) {
+			doBackfill();
+		} else {
+			Object.keys(textObject).forEach(key => {
+				card.text[key] = textObject[key];
+			});
+		}
 	}
 	redrawTextOptions(oldCardText);
+}
+function doBackfill() {
+	card.frames.forEach(item => {
+		console.log(item);
+		if (item.name.includes("Mutated P/T")) {
+			item.name = item.name.replace("Mutated", "Evolved");
+		}
+		if (item.name.includes("Top Mutate")) {
+			item.name = item.name.replace("Mutate", "Evolve");
+		}
+	});
+	if (card.text.mutated_pt != null) {
+		card.text.evolved_pt = card.text.mutated_pt;
+		delete card.text.mutated_pt;
+		card.text.evolved_pt.name = "Evolved P/T";
+	}
+	if (card.text.mutated_stamp != null) {
+		card.text.evolved_stamp = card.text.mutated_stamp;
+		delete card.text.mutated_stamp;
+		card.text.evolved_stamp.name = "Evolved Stamp";
+		card.text.evolved_stamp.text = "EVOLVED";
+	}
+	if (card.text.mutate != null) {
+		card.text.mutate.text = card.text.mutate.text.replace("Mutate onto", "Evolve from");
+		card.text.mutate.text = card.text.mutate.text.replaceAll("mutate", "evolve");
+		card.text.mutate.text = card.text.mutate.text.replace("mutated_pt", "evolved_pt");
+	}
+	if (card.text.topMutate != null) {
+		card.text.topEvolve = card.text.topMutate;
+		delete card.text.topMutate;
+		card.text.topEvolve.text = card.text.topEvolve.text.replace("Mutate onto", "Evolve from");
+	}
+	bottomInfoEdited();
 }
 function redrawTextOptions(oldCardText) {
 	document.querySelector('#text-options').innerHTML = null;
@@ -3085,7 +3124,7 @@ function trackSaveableTextOptions() {
 		return null;
 	}
 	var result = {};
-	const saveableKeys = ['mutated_pt', 'mutated_pt_stamp', 'preevo'];
+	const saveableKeys = ['evolved_pt', 'evolved_pt_stamp', 'evolved_stamp', 'preevo'];
 	saveableKeys.forEach((key) => {
 		if (card.text[key]) {
 			result[key] = card.text[key];
@@ -3192,14 +3231,17 @@ function writeText(textObject, targetContext) {
 		rawText = params.get('copyright'); //so people using CC for custom card games without WotC's IP can customize their copyright info
 		if (rawText == 'none') { rawText = ''; }
 	}
+	if (rawText == undefined) {
+		return;
+	}
 	if (rawText.toLowerCase().includes('{cardname}') || rawText.toLowerCase().includes('~')) {
 		rawText = rawText.replace(/{cardname}|~/ig, getInlineCardName());
 	}
 	if (rawText.toLowerCase().includes('{pre}')) {
 		rawText = rawText.replace(/{pre}/ig, getPreEvoName());
 	}
-	if (rawText.toLowerCase().includes('{mutated_pt}')) {
-		rawText = rawText.replace(/{mutated_pt}/ig, getMutatedPt());
+	if (rawText.toLowerCase().includes('{evolved_pt}')) {
+		rawText = rawText.replace(/{evolved_pt}/ig, getEvolvedPt());
 	}
 	if (document.querySelector('#info-artist').value == '') {
 		rawText = rawText.replace('\uFFEE{elemidinfo-artist}', '');
@@ -3313,7 +3355,7 @@ function writeText(textObject, targetContext) {
 			textOutlineWidth = 0;
 		}
 		lineContext.lineWidth = textOutlineWidth;
-		if (textObject.isUB === "TRUE" && card.frames.findIndex(element => element.name.toLowerCase().includes('power/toughness')) >= 0 && card.frames.findIndex(element => element.name.toLowerCase().includes('mutated ')) < 0 && document.querySelector('#enableUniversesBeyondCollectorInfo').checked) {
+		if (textObject.isUB === "TRUE" && card.frames.findIndex(element => element.name.toLowerCase().includes('power/toughness')) >= 0 && card.frames.findIndex(element => element.name.toLowerCase().includes('evolved ')) < 0 && document.querySelector('#enableUniversesBeyondCollectorInfo').checked) {
 			textAlign = 'left';
 		}
 		//Begin looping through words/codes
@@ -3485,9 +3527,9 @@ function writeText(textObject, targetContext) {
 					if (savedTextXPosition2 > currentX) {
 						currentX = savedTextXPosition2;
 					}
-				} else if (possibleCode.includes('mutatedptshift')) {
-					if (card.frames.findIndex(element => element.name.toLowerCase().includes('mutated ')) >= 0) {
-						ptShift[0] = scaleWidth(parseFloat(possibleCode.replace('mutatedptshift', '').split(',')[0]));
+				} else if (possibleCode.includes('evolvedptshift')) {
+					if (card.frames.findIndex(element => element.name.toLowerCase().includes('evolved ')) >= 0) {
+						ptShift[0] = scaleWidth(parseFloat(possibleCode.replace('evolvedptshift', '').split(',')[0]));
 						ptShift[1] = scaleHeight(parseFloat(possibleCode.split(',')[1]));
 					}
 				} else if (possibleCode.includes('ptshift')) {
@@ -3611,11 +3653,11 @@ function writeText(textObject, targetContext) {
 
 			//if the word goes past the max line width, go to the next line
 			if (wordToWrite && lineContext.measureText(wordToWrite).width + currentX >= textWidth && textArcRadius == 0) {
-				if (textObject.name.includes("Top Mutate") && card.frames.length > 0) {
+				if (textObject.name.includes("Top Evolve") && card.frames.length > 0) {
 					textObject.x -= .1;
 					textObject.width += .1;
 					for (var i = 0; i < card.frames.length; i++) {
-						if (card.frames[i].name.includes("Top Mutate")) {
+						if (card.frames[i].name.includes("Top Evolve")) {
 							card.frames[i].bounds.width += .1;
 							card.frames[i].bounds.x -= .1;
 							drawFrames();
@@ -3881,13 +3923,23 @@ async function addTextbox(textboxType) {
 		loadTextOptions({pt: {name:'Power/Toughness', text:'', x:0.7928, y:0.902, width:0.1367, height:0.0372, size:0.0372, font:'belerenbsc', oneLine:true, align:'center'}}, false);
 	} else if (textboxType == 'DateStamp' && !card.text.dateStamp) {
 		loadTextOptions({dateStamp: {name:'Date Stamp', text:'', x:0.11, y:0.5072, width:0.78, height:0.0286, size:0.0286, font:'belerenb', oneLine:true, align:'right', color:'#ffd35b', shadowX:-0.0007, shadowY:-0.001}}, false);
-	} else if (textboxType == 'ClearMutatedP/T') {
+	} else if (textboxType == 'ClearEvolvedP/T') {
+		console.log(card);
+		delete card.text['evolved_pt'];
 		delete card.text['mutated_pt'];
+		delete card.text['evolved_pt_stamp'];
 		delete card.text['mutated_pt_stamp'];
-		delete card.text['preevo'];
+		delete card.text['evolved_stamp'];
+		if (card.text.mutate != undefined) {
+			card.text.mutate.text = card.text.mutate.text.replaceAll("with base power and toughness {evolved_pt} ", "");
+			card.text.mutate.text = card.text.mutate.text.replaceAll("with base power and toughness {mutated_pt} ", "");
+		}
+		if (card.text.topEvolve != undefined && card.text.topEvolve.name != "Top Evolve") {
+			card.text.topEvolve.name = "Top Evolve";
+		}
 		redrawTextOptions(card.text);
-	} else if (textboxType == 'TopMutate') {
-		await loadTextOptions({topMutate: {name:'Top Mutate', text:"Mutate onto ", x:0.57, y:0.1129, width:0.32, height:0.0243, oneLine:true, font:'mplantini', size:0.0229, color:'white', shadowX:0.0014, shadowY:0.001, align:'center'}}, false);
+	} else if (textboxType == 'TopEvolve' || textboxType == 'TopMutate') {
+		await loadTextOptions({topEvolve: {name:'Top Evolve', text:"Evolve from ", x:0.57, y:0.1129, width:0.32, height:0.0243, oneLine:true, font:'mplantini', size:0.0229, color:'white', shadowX:0.0014, shadowY:0.001, align:'center'}}, false);
 	}
 }
 //ART TAB
@@ -3915,6 +3967,9 @@ function artEdited() {
 	drawCard();
 }
 function autoFitArt() {
+	if (localStorage.getItem('artLock') == 'true') {
+		return;
+	}
 	document.querySelector('#art-rotate').value = 0;
 	if (art.width / art.height > scaleWidth(card.artBounds.width) / scaleHeight(card.artBounds.height)) {
 		document.querySelector('#art-y').value = Math.round(scaleY(card.artBounds.y) - scaleHeight(card.marginY));
@@ -4257,6 +4312,8 @@ async function bottomInfoEdited() {
 	card.infoArtist = document.querySelector('#info-artist').value;
 	card.infoYear = document.querySelector('#info-year').value;
 	card.infoNote = document.querySelector('#info-note').value;
+	card.ub = document.querySelector('#info-ub').value;
+	card.wizards = document.querySelector('#info-wizards').value;
 
 	if (document.querySelector('#enableCollectorInfo').checked) {
 		for (var textObject of Object.entries(card.bottomInfo)) {
@@ -4307,6 +4364,16 @@ function enableUniversesBeyondCollectorInfo() {
 function enableImportCollectorInfo() {
 	localStorage.setItem('enableImportCollectorInfo', document.querySelector('#enableImportCollectorInfo').checked);
 }
+function enableUseCustomWizardsInfo() {
+	localStorage.setItem('enableUseCustomWizardsInfo', document.querySelector('#enableUseCustomWizardsInfo').checked);
+	setBottomInfoStyle();
+	bottomInfoEdited();
+}
+function enableBottomLeftInfo() {
+	localStorage.setItem('enableBottomLeftInfo', document.querySelector('#enableBottomLeftInfo').checked);
+	setBottomInfoStyle();
+	bottomInfoEdited();
+}
 function setAutoFrame() {
 	var value = document.querySelector('#autoFrame').value;
 	localStorage.setItem('autoFrame', value);
@@ -4320,6 +4387,9 @@ function setAutoFrame() {
 }
 function setAutofit() {
 	localStorage.setItem('autoFit', document.querySelector('#art-update-autofit').checked);
+}
+function setArtLock() {
+	localStorage.setItem('artLock', document.querySelector('#art-lock').checked);
 }
 function removeDefaultCollector() {
 	defaultCollector = {}; //{number: year, rarity:'P', setCode:'MTG', lang:'EN', starDot:false};
@@ -4415,7 +4485,20 @@ function downloadCard(alt = false, jpeg = false) {
 	} else {
 		// Prep file information
 		var imageDataURL;
-		var imageName = getCardName();
+		var imageName = getCardName().replaceAll("’", "'");
+		var num = card.infoNumber;
+		if (card.infoNumber.includes("/")) {
+			num = card.infoNumber.substring(0, card.infoNumber.indexOf("/")).padStart(4, '0');
+		}
+		imageName = num + imageName;
+		var extension = "";
+		card.frames.forEach(frame => {
+			if (frame.name.includes("Extension")) {
+				extension = " print margin";
+			}
+		});
+		imageName = imageName + extension;
+
 		if (jpeg) {
 			imageDataURL = cardCanvas.toDataURL('image/jpeg', 0.8);
 			imageName = imageName + '.jpeg';
@@ -4778,6 +4861,8 @@ function saveCard(saveFromFile) {
 				altArt = " full art";
 			} else if (frame.src.includes("tokenFrame")) {
 				altArt = " token";
+			} else if (frame.src.includes("Extension")) {
+				altArt = " 1/8 border";
 			}
 		});
 		cardKey = cardKey + altArt;
@@ -5241,7 +5326,7 @@ if (!localStorage.getItem('enableImportCollectorInfo')) {
 	document.querySelector('#enableImportCollectorInfo').checked = (localStorage.getItem('enableImportCollectorInfo') == 'true');
 }
 if (!localStorage.getItem('enableNewCollectorStyle')) {
-	localStorage.setItem('enableNewCollectorStyle', 'false');
+	localStorage.setItem('enableNewCollectorStyle', 'true');
 } else {
 	document.querySelector('#enableNewCollectorStyle').checked = (localStorage.getItem('enableNewCollectorStyle') == 'true');
 }
@@ -5255,6 +5340,11 @@ if (!localStorage.getItem('enableUniversesBeyondCollectorInfo')) {
 } else {
 	document.querySelector('#enableUniversesBeyondCollectorInfo').checked = (localStorage.getItem('enableUniversesBeyondCollectorInfo') == 'true');
 }
+if (!localStorage.getItem('enableUseCustomWizardsInfo')) {
+	localStorage.setItem('enableUseCustomWizardsInfo', 'true');
+} else {
+	document.querySelector('#enableUseCustomWizardsInfo').checked = (localStorage.getItem('enableUseCustomWizardsInfo') == 'true');
+}
 if (!localStorage.getItem('autoFrame')) {
 	localStorage.setItem('autoFrame', 'false');
 } else {
@@ -5264,6 +5354,11 @@ if (!localStorage.getItem('autoFit')) {
 	localStorage.setItem('autoFit', 'true');
 } else {
 	document.querySelector('#art-update-autofit').checked = localStorage.getItem('autoFit');
+}
+if (!localStorage.getItem('lockArt')) {
+	localStorage.setItem('lockArt', 'true');
+} else {
+	document.querySelector('#art-lock').checked = localStorage.getItem('lockArt');
 }
 
 // lock set symbol code (user defaults)
