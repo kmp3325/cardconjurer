@@ -3170,7 +3170,7 @@ function uploadMaskOption(imageSource) {
 	uploadedMask.image.src = imageSource;
 }
 function uploadFrameOption(imageSource) {
-	const uploadedFrame = {name:`Uploaded Image (${customCount})`, src:imageSource, noThumb:true};
+	const uploadedFrame = {name:`Uploaded Image (${customCount})`, src:imageSource, noThumb:true, bounds:{x:0.0887, y:0.7896, width:0.06, height:0.0429}};
 	customCount ++;
 	availableFrames.push(uploadedFrame);
 	loadFramePack();

@@ -11,7 +11,10 @@ availableFrames = [
 	{name:'Blue Mana Symbol', src:'/img/manaSymbols/u.svg', bounds:{x:0.23, y:0.7896, width:0.06, height:0.0429}},
 	{name:'Black Mana Symbol', src:'/img/manaSymbols/b.svg', bounds:{x:0.2027, y:0.8486, width:0.06, height:0.0429}},
 	{name:'Red Mana Symbol', src:'/img/manaSymbols/r.svg', bounds:{x:0.116, y:0.8486, width:0.06, height:0.0429}},
-	{name:'Green Mana Symbol', src:'/img/manaSymbols/g.svg', bounds:{x:0.0887, y:0.7896, width:0.06, height:0.0429}}
+	{name:'Green Mana Symbol', src:'/img/manaSymbols/g.svg', bounds:{x:0.0887, y:0.7896, width:0.06, height:0.0429}},
+	{name:'Multicolor Mana Symbol', src:'/img/multicolor.png', bounds:{x:0.0887, y:0.7896, width:0.06, height:0.0429}},
+	{name:'Colorless Mana Symbol', src:'/img/manaSymbols/c.svg', bounds:{x:0.0887, y:0.7896, width:0.06, height:0.0429}},
+	{name:'Land Symbol', src:'/img/land-symbol.png', bounds:{x:0.0887, y:0.7896, width:0.06, height:0.0429}},
 ];
 //disables/enables the "Load Frame Version" button
 document.querySelector('#loadFrameVersion').disabled = false;

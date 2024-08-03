@@ -10,8 +10,10 @@ SETTINGS
 """
 
 NAME = "localhost"
-# regular at 8080
-# ub at 8090
+# regular pokes (outdated) at 8080
+# ub pokes at 8090
+# three kingdoms at 8091
+
 PORT = 8090
 DIRECTORY = os.getcwd()
 
