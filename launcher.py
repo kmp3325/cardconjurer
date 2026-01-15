@@ -10,7 +10,15 @@ SETTINGS
 """
 
 NAME = "localhost"
-PORT = 8080
+# regular pokes (outdated) at 8080
+# ub pokes at 8090
+# three kingdoms at 8091
+# Cam & Alex at 8092
+# Leah at 8094
+# FF1 & 2 at 8095
+# Dragons & Other Proxies at 8096
+# FF3 at 8097
+PORT = 8097
 DIRECTORY = os.getcwd()
 
 """
@@ -31,7 +39,7 @@ if __name__ == "__main__":
     print("Server started http://%s:%s" % (NAME, PORT))
 
     try:
-        webbrowser.open('http://localhost:8080', new=2)
+        webbrowser.open('http://localhost:'+str(PORT), new=2)
         webServer.serve_forever()
     except KeyboardInterrupt:
         pass

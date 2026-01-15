@@ -142,13 +142,17 @@ async function resetCardIrregularities({canvas = [getStandardWidth(), getStandar
 	}
 }
 async function setBottomInfoStyle() {
+	var wizards = '\u2122 & \u00a9 {elemidinfo-year} Wizards of the Coast';
+	if (document.querySelector('#enableUseCustomWizardsInfo').checked) {
+		wizards = "{elemidinfo-wizards}";
+	}
 	if (document.querySelector('#enableNewCollectorStyle').checked) {
 			await loadBottomInfo({
 				midLeft: {text:'{elemidinfo-set} \u2022 {elemidinfo-language}  {savex}{fontbelerenbsc}{fontsize' + scaleHeight(0.001) + '}{upinline' + scaleHeight(0.0005) + '}\uFFEE{savex2}{elemidinfo-artist}', x:0.0647, y:0.9548, width:0.8707, height:0.0171, oneLine:true, font:'gothammedium', size:0.0171, color:card.bottomInfoColor, outlineWidth:0.003},
-				topLeft: {text:'{elemidinfo-rarity} {kerning3}{elemidinfo-number}{kerning0}', x:0.0647, y:0.9377, width:0.8707, height:0.0171, oneLine:true, font:'gothammedium', size:0.0171, color:card.bottomInfoColor, outlineWidth:0.003},
+				topLeft: {text:'{elemidinfo-rarity}  {kerning3}{elemidinfo-number}{kerning0}', x:0.0647, y:0.9377, width:0.8707, height:0.0171, oneLine:true, font:'gothammedium', size:0.0171, color:card.bottomInfoColor, outlineWidth:0.003},
 				note: {text:'{loadx}{elemidinfo-note}', x:0.0647, y:0.9377, width:0.8707, height:0.0171, oneLine:true, font:'gothammedium', size:0.0171, color:card.bottomInfoColor, outlineWidth:0.003},
 				bottomLeft: {text:'NOT FOR SALE', x:0.0647, y:0.9719, width:0.8707, height:0.0143, oneLine:true, font:'gothammedium', size:0.0143, color:card.bottomInfoColor, outlineWidth:0.003},
-				wizards: {name:'wizards', text:'{ptshift0,0.0172}\u2122 & \u00a9 {elemidinfo-year} Wizards of the Coast', x:0.0647, y:0.9377, width:0.8707, height:0.0167, oneLine:true, font:'mplantin', size:0.0162, color:card.bottomInfoColor, align:'right', outlineWidth:0.003},
+				wizards: {name:'wizards', text:'{ptshift0,0.0172}' + wizards, x:0.0647, y:0.9377, width:0.8707, height:0.0167, oneLine:true, font:'mplantin', size:0.0162, color:card.bottomInfoColor, align:'right', outlineWidth:0.003},
 				bottomRight: {text:'{ptshift0,0.0172}CardConjurer.com', x:0.0647, y:0.9548, width:0.8707, height:0.0143, oneLine:true, font:'mplantin', size:0.0143, color:card.bottomInfoColor, align:'right', outlineWidth:0.003}
 			});
 		} else {
@@ -158,7 +162,7 @@ async function setBottomInfoStyle() {
 				note: {text:'{loadx2}{elemidinfo-note}', x:0.0647, y:0.9377, width:0.8707, height:0.0171, oneLine:true, font:'gothammedium', size:0.0171, color:card.bottomInfoColor, outlineWidth:0.003},
 				rarity: {text:'{loadx}{elemidinfo-rarity}', x:0.0647, y:0.9377, width:0.8707, height:0.0171, oneLine:true, font:'gothammedium', size:0.0171, color:card.bottomInfoColor, outlineWidth:0.003},
 				bottomLeft: {text:'NOT FOR SALE', x:0.0647, y:0.9719, width:0.8707, height:0.0143, oneLine:true, font:'gothammedium', size:0.0143, color:card.bottomInfoColor, outlineWidth:0.003},
-				wizards: {name:'wizards', text:'{ptshift0,0.0172}\u2122 & \u00a9 {elemidinfo-year} Wizards of the Coast', x:0.0647, y:0.9377, width:0.8707, height:0.0167, oneLine:true, font:'mplantin', size:0.0162, color:card.bottomInfoColor, align:'right', outlineWidth:0.003},
+				wizards: {name:'wizards', text:'{ptshift0,0.0172}' + wizards, x:0.0647, y:0.9377, width:0.8707, height:0.0167, oneLine:true, font:'mplantin', size:0.0162, color:card.bottomInfoColor, align:'right', outlineWidth:0.003},
 				bottomRight: {text:'{ptshift0,0.0172}CardConjurer.com', x:0.0647, y:0.9548, width:0.8707, height:0.0143, oneLine:true, font:'mplantin', size:0.0143, color:card.bottomInfoColor, align:'right', outlineWidth:0.003}
 			});
 		}
@@ -4011,7 +4015,9 @@ function writeText(textObject, targetContext) {
 						ptShift[0] = scaleWidth(parseFloat(possibleCode.replace('ptshift', '').split(',')[0]));
 						ptShift[1] = scaleHeight(parseFloat(possibleCode.split(',')[1]));
 					}
-				} else if (possibleCode.includes('rollcolor')) {
+				} else if (possibleCode.includes('ubshift')) {
+					// Do nothing.
+				}  else if (possibleCode.includes('rollcolor')) {
 					savedRollColor = possibleCode.replace('rollcolor', '') || 'black';
 				} else if (possibleCode.includes('roll')) {
 					drawTextBetweenFrames = true;
@@ -4554,6 +4560,12 @@ async function addTextbox(textboxType) {
 }
 //ART TAB
 function uploadArt(imageSource, otherParams) {
+	if (!imageSource.includes('http')) {
+		imageSource = 'http://localhost:8080' + imageSource;
+	}
+	if (imageSource.includes('localhost:') && window.location.href.includes('localhost:')) {
+		imageSource = imageSource.replace(/http:\/\/localhost:\d*\//, window.location.href);
+	}
 	art.src = imageSource;
 	if (otherParams && otherParams == 'autoFit') {
 		art.onload = function() {
@@ -4748,6 +4760,9 @@ function artStopDrag(e) {
 }
 //SET SYMBOL TAB
 function uploadSetSymbol(imageSource, otherParams) {
+	if (imageSource.includes('localhost:') && window.location.href.includes('localhost:')) {
+		imageSource = imageSource.replace(/http:\/\/localhost:\d*\//, window.location.href);
+	}
 	setSymbol.src = imageSource;
 	if (otherParams && otherParams == 'resetSetSymbol') {
 		setSymbol.onload = function() {
@@ -4945,10 +4960,13 @@ async function bottomInfoEdited() {
 	card.infoArtist = document.querySelector('#info-artist').value;
 	card.infoYear = document.querySelector('#info-year').value;
 	card.infoNote = document.querySelector('#info-note').value;
+	card.wizards = document.querySelector('#info-wizards').value;
 
 	if (document.querySelector('#enableCollectorInfo').checked) {
 		for (var textObject of Object.entries(card.bottomInfo)) {
-			if (["NOT FOR SALE", "Wizards of the Coast", "CardConjurer.com", "cardconjurer.com"].some(v => textObject[1].text.includes(v))) {
+			if (["NOT FOR SALE", "CardConjurer.com", "cardconjurer.com"].some(v => textObject[1].text.includes(v))) {
+				continue;
+			} else if (textObject[0].includes("universesBeyond")) {
 				continue;
 			} else {
 				textObject[1].name = textObject[0];
@@ -5010,6 +5028,11 @@ function enableCollectorInfo() {
 }
 function enableImportCollectorInfo() {
 	localStorage.setItem('enableImportCollectorInfo', document.querySelector('#enableImportCollectorInfo').checked);
+}
+function enableUseCustomWizardsInfo() {
+	localStorage.setItem('enableUseCustomWizardsInfo', document.querySelector('#enableUseCustomWizardsInfo').checked);
+	setBottomInfoStyle();
+	bottomInfoEdited();
 }
 function setAutoFrame() {
 	var value = document.querySelector('#autoFrame').value;
@@ -5229,7 +5252,19 @@ function downloadCard(alt = false, jpeg = false) {
 	} else {
 		// Prep file information
 		var imageDataURL;
-		var imageName = getCardName();
+		var prepend = "";
+		try {
+			if (card.text.type.text.contains("Token") || card.text.type.text.startsWith("Emblem")) {
+				prepend = "T";
+			}
+		} catch(e) {}
+		var extension = "";
+		card.frames.forEach(frame => {
+			if (frame.name.includes("Extension")) {
+				extension = " print margin";
+			}
+		});
+		var imageName = prepend + card.infoNumber + getCardName() + extension;
 		if (jpeg) {
 			imageDataURL = cardCanvas.toDataURL('image/jpeg', 0.8);
 			imageName = imageName + '.jpeg';
@@ -6903,6 +6938,11 @@ if (!localStorage.getItem('enableCollectorInfo')) {
 	localStorage.setItem('enableCollectorInfo', 'true');
 } else {
 	document.querySelector('#enableCollectorInfo').checked = (localStorage.getItem('enableCollectorInfo') == 'true');
+}
+if (!localStorage.getItem('enableUseCustomWizardsInfo')) {
+	localStorage.setItem('enableUseCustomWizardsInfo', 'true');
+} else {
+	document.querySelector('#enableUseCustomWizardsInfo').checked = (localStorage.getItem('enableUseCustomWizardsInfo') == 'true');
 }
 if (!localStorage.getItem('autoFrame')) {
 	localStorage.setItem('autoFrame', 'false');
