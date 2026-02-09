@@ -5245,6 +5245,25 @@ function drawCard() {
 	previewContext.clearRect(0, 0, previewCanvas.width, previewCanvas.height);
 	previewContext.drawImage(cardCanvas, 0, 0, previewCanvas.width, previewCanvas.height);
 }
+function rename(includeInfoNumber = false) {
+	var prepend = "";
+	try {
+		if (card.text.type.text.includes("Token") || card.text.type.text.startsWith("Emblem")) {
+			prepend = "T";
+		}
+	} catch(e) {}
+	var extension = "";
+	card.frames.forEach(frame => {
+		if (frame.name.includes("Extension")) {
+			extension = " print margin";
+		}
+	});
+	if (includeInfoNumber) {
+		return prepend + card.infoNumber + getCardName() + extension;
+	} else {
+		return prepend + getCardName() + extension;
+	}
+}
 //DOWNLOADING
 function downloadCard(alt = false, jpeg = false) {
 	if (card.infoArtist.replace(/ /g, '') == '' && !card.artSource.includes('/img/blank.png') && !card.artZoom == 0) {
@@ -5252,19 +5271,7 @@ function downloadCard(alt = false, jpeg = false) {
 	} else {
 		// Prep file information
 		var imageDataURL;
-		var prepend = "";
-		try {
-			if (card.text.type.text.contains("Token") || card.text.type.text.startsWith("Emblem")) {
-				prepend = "T";
-			}
-		} catch(e) {}
-		var extension = "";
-		card.frames.forEach(frame => {
-			if (frame.name.includes("Extension")) {
-				extension = " print margin";
-			}
-		});
-		var imageName = prepend + card.infoNumber + getCardName() + extension;
+		var imageName = rename(true);
 		if (jpeg) {
 			imageDataURL = cardCanvas.toDataURL('image/jpeg', 0.8);
 			imageName = imageName + '.jpeg';
@@ -6456,7 +6463,7 @@ function saveCard(saveFromFile) {
 	if (saveFromFile) {
 		cardKey = saveFromFile.key;
 	} else {
-		cardKey = getCardName();
+		cardKey = rename();
 	}
 	if (!saveFromFile) {
 		cardKey = prompt('Enter the name you would like to save your card under:', cardKey);

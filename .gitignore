@@ -4,6 +4,8 @@ CORS.json
 *.bak
 dev/*
 
+/local_art/
+
 # dependencies
 /node_modules
 /.pnp
