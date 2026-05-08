@@ -260,6 +260,7 @@
 									<h5>{/indent}</h5><h5>Removes paragraph indendation</h5>
 									<h5>{kerning#}</h5><h5>Changes the kerning (letter spacing) to #</h5>
 									<h5>{roll___}</h5><h5>Used for dice-rolling cards (like from AFR) - whatever you fill in for '___' will be bolded, and alternating paragraphs will be shaded.</h5>
+									<h5>{ruby:base:annotation}</h5><h5>For rendering furigana/pinyin annotations (requires manual font sizing)</h5>
 									<h5>Notes</h5><h5>For colors, you may use HTML color codes (ie 'green'), hex color codes (ie '#00FF00'), or rgb (ie 'rgb(0,255,0)'')</h5>
 								</div>
 								<h5>Mana Symbol Codes:</h5>
@@ -483,6 +484,8 @@
 								<option value="/img/watermarks/school-witherbloom.svg">Witherbloom</option>
 								<option value="/img/watermarks/school-lorehold.svg">Lorehold</option>
 								<option value="/img/watermarks/school-quandrix.svg">Quandrix</option>
+								<option disabled>Reality Fracture</option>
+								<option value="/img/watermarks/fracture.svg">Fracture</option>
 								<option disabled>Families (New Capenna)</option>
 								<option value="/img/watermarks/family-brokers.svg">Brokers</option>
 								<option value="/img/watermarks/family-obscura.svg">Obscura</option>
@@ -759,6 +762,15 @@
 							<option value="8th">Eighth Edition</option>
 							<option value="Seventh">Seventh Edition</option>
 
+							<option disabled>Showcase frames</option>
+							<option value="JapanShowcase">Japan Showcase</option>
+							<option value="Vault">Vault (BIG)</option>
+							
+							<option disabled>Alternative Layouts</option>
+							<option value="Adventure">Adventure</option>
+							<option value="Omen">Omen</option>
+							<option value="Prepare">Prepare</option>
+
 							<option disabled>Redone frames</option>
 							<option value="M15RegularNew">Regular (Accurate)</option>
 							<option value="FullArtNew">Full art (Accurate)</option>
@@ -970,6 +982,7 @@
 	-->
 
 	</div>
+	<script defer src='/js/autoFrame.js'></script>
 	<script defer src='/js/creator-23.js'></script>
 	<script defer src='/js/frameSearch.js'></script>
 <!-- END OF CONTENT -->
